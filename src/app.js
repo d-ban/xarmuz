@@ -66,6 +66,15 @@ app.use('/images', function(req, res) {
         res.end(img, 'binary');
         status = 1;
       }
+      else if (fs.existsSync(storage1 + "cover" + "." + image_extensions[i])) {
+       var img = fs.readFileSync(storage1 + "cover" + "." + image_extensions[i]);
+       res.writeHead(200, {
+         'Content-Type': 'image/' + image_extensions[i] + ''
+       });
+       res.crossOrigin = "anonymous";
+       res.end(img, 'binary');
+       status = 1;
+     }
     }
     if (status == 0) {
       var img = fs.readFileSync('public/no_image.png');
