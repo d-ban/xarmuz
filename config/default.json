@@ -7,7 +7,7 @@
     "default": 10,
     "max": 500
   },
-  "mongodb": "mongodb://localhost:27017/xarmuz",
+  "mongodb": "mongodb://x.me:27017/xarmuz",
   "authentication": {
     "secret": "1808e986731c649f880e7d49a4aa434ef030ade41d13417e581d12860ef58be3a1721e39c3d99a70d5b0337dec778b891eaae6a2c384ade5a2479cb5bf1f35e4e288a8ff493eb2b9d5b444fbdc0b3aeb9b30ce91163a417e2aaa6ad86e0ed50b9031043fb7d8ef9793f0c966ea404ef1ab90ecc31dde5d87b6af958fc3b17c368c112f0c7e4977e0f5b9c93a00cb9570e9185d0a567ecdeba245b597e57c811e21b91136e0866617462eb2f8e0ab3e769ceb728956cfc90d54cf0c4881c230ed9be63b09ea10d08bafa6a5987413351bdbabc8fb535bad6df8d71340ca148bbf85905c7a80144cc30e5227f74fb21b17ae13a71d1c366a50fa734f791b199430",
     "strategies": [
@@ -20,7 +20,7 @@
       "header": {
         "typ": "access"
       },
-      "audience": "https://yourdomain.com",
+      "audience": "https://x.me",
       "subject": "anonymous",
       "issuer": "feathers",
       "algorithm": "HS256",

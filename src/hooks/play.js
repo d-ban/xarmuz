@@ -86,7 +86,7 @@ else if (command==='playNext') {
       var csr1 = mpd.parseKeyValueMessage(currentsongResponse);
       var from = csr1.playlistlength-1
       var to = csr1.nextsong
-      console.log(from,to);
+      // console.log(from,to);
       context.app.client.sendCommand(cmd("move", [from,to,]), function(err, currentsongResponse) {
         // var csr1 = mpd.parseKeyValueMessage(currentsongResponse);
         // console.log(currentsongResponse);
@@ -109,9 +109,14 @@ else if (command==='random') {
                         $limit: 0
                       }
                     }).then((usersCount) => {
-                      console.log(usersCount);
+                      // console.log(usersCount);
                       csr2.favorite=usersCount.total
-                      resolve({"status":csr1,"currentsong":csr2})
+                      // resolve({"status":csr1,"currentsong":csr2})
+                      context.app.client.sendCommand(cmd("playlistinfo", [csr1.nextsong]), function(err, nextsongData) {
+                          let nextsong = mpd.parseKeyValueMessage(nextsongData)
+
+                          resolve({"status":csr1,"currentsong":csr2,"nextsong":nextsong})
+                        });
                     });
         // resolve({"status":csr1,"currentsong":csr2})
       });
@@ -124,7 +129,7 @@ else {
     if (currentsongResponse) {
       csr = mpd.parseKeyValueMessage(currentsongResponse);
 
-    }
+
     // console.log(csr);
     context.app.client.sendCommand(cmd("currentsong", []), function(err, currentsongResponse) {
       var csr1 = mpd.parseKeyValueMessage(currentsongResponse);
@@ -136,10 +141,19 @@ else {
                     }
                   }).then((usersCount) => {
                     csr1.favorite=usersCount.total
-                    resolve({"status":csr,"currentsong":csr1})
+                    // console.log(csr.nextsong);
+                    context.app.client.sendCommand(cmd("playlistinfo", [csr.nextsong]), function(err, nextsongData) {
+                        let nextsong = mpd.parseKeyValueMessage(nextsongData)
+
+                        resolve({"status":csr,"currentsong":csr1,"nextsong":nextsong})
+                      });
+
 
                   });
-    });
+          });
+    }else {
+      resolve({"status":csr})
+    }
   });
 
 }
