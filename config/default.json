@@ -1,6 +1,7 @@
 {
   "host": "localhost",
   "mpdHost": "x.me",
+  "musicRootDir": "/home/dban/mpd/storage/music/",
   "port": 3031,
   "public": "../public/",
   "paginate": {

@@ -20,6 +20,8 @@ const mongoose = require('./mongoose');
 
 const authentication = require('./authentication');
 
+const file_extension = require('path')
+fs = require('fs');
 
 const app = express(feathers());
 
@@ -34,7 +36,50 @@ app.use(express.urlencoded({ extended: true }));
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 // Host the public folder
 app.use('/', express.static(app.get('public')));
+app.use('/images', function(req, res) {
+  // console.log("images<<<<<<<<<<<<<<<<<");
+  var image_extensions = ['png', 'jpg', 'jpeg'];
+  var storage1 = app.settings.musicRootDir
+  var file = req.query.file;
+  // var img = fs.readFileSync('/Users/dban/Music/no_image.png');
+  console.log(file);
+  if (file) {
+    var status = 0;
+    for (var i = 0; i < image_extensions.length; i++) {
 
+      var file2image = file.replace(file_extension.extname(file), "." + image_extensions[i]);
+        // console.log(storage1 + file2image);
+      if (fs.existsSync(storage1 + file2image)) {
+
+        var img = fs.readFileSync(storage1 + file2image);
+        res.writeHead(200, {
+          'Content-Type': 'image/' + image_extensions[i] + ''
+        });
+        res.end(img, 'binary');
+        status = 1;
+      } else if (fs.existsSync(storage1 + file + "." + image_extensions[i])) {
+        var img = fs.readFileSync(storage1 + file + "." + image_extensions[i]);
+        res.writeHead(200, {
+          'Content-Type': 'image/' + image_extensions[i] + ''
+        });
+        res.crossOrigin = "anonymous";
+        res.end(img, 'binary');
+        status = 1;
+      }
+    }
+    if (status == 0) {
+      var img = fs.readFileSync('public/no_image.png');
+      res.setHeader("Cache-Control", "public, max-age=2592000");
+      res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
+      res.writeHead(200, {
+        'Content-Type': 'image/png'
+      });
+      res.end(img, 'binary');
+    }
+  } else {
+    res.send("no file:" + file);
+  }
+})
 // Set up Plugins and providers
 app.configure(express.rest());
 app.configure(socketio());
@@ -54,5 +99,9 @@ app.use(express.notFound());
 app.use(express.errorHandler({ logger }));
 
 app.hooks(appHooks);
+
+
+
+
 
 module.exports = app;
