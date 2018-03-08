@@ -1,0 +1,500 @@
+{
+	"info": {
+		"name": "Test",
+		"_postman_id": "e1a42dbf-bf26-4d9a-8538-4297a672d036",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed6a3cf6-41e3-4b99-a039-49cad77a1a52",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"file\", data.currentsong.file);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3030/play?command=status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"play"
+					],
+					"query": [
+						{
+							"key": "command",
+							"value": "status",
+							"equals": true
+						}
+					]
+				},
+				"description": "play next track"
+			},
+			"response": []
+		},
+		{
+			"name": "shuffle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "30a8cf8e-869e-4574-9fee-9d54536be4e5",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"file\", data.file);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3030/play?command=shuffle",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"play"
+					],
+					"query": [
+						{
+							"key": "command",
+							"value": "shuffle",
+							"equals": true
+						}
+					]
+				},
+				"description": "shuffle tracks"
+			},
+			"response": []
+		},
+		{
+			"name": "next track",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c361d519-eb6b-46a6-9f86-240c6e47084b",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"file\", data.currentsong.file);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3030/play?command=next",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"play"
+					],
+					"query": [
+						{
+							"key": "command",
+							"value": "next",
+							"equals": true
+						}
+					]
+				},
+				"description": "play next track"
+			},
+			"response": []
+		},
+		{
+			"name": "play next",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c361d519-eb6b-46a6-9f86-240c6e47084b",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"file\", data.currentsong.file);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3030/play?command=playNext&path=ytdl/done_0017/k7/Tricky feat. Francesca Belmonte - We Begin-293524410.mp3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"play"
+					],
+					"query": [
+						{
+							"key": "command",
+							"value": "playNext",
+							"equals": true
+						},
+						{
+							"key": "path",
+							"value": "ytdl/done_0017/k7/Tricky feat. Francesca Belmonte - We Begin-293524410.mp3",
+							"equals": true
+						}
+					]
+				},
+				"description": "play next file"
+			},
+			"response": []
+		},
+		{
+			"name": "play next multiple",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "73054729-5aa8-4d7c-a0df-db0ae81bf860",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t \"data\": {{data}}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/play",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"play"
+					]
+				},
+				"description": "play next file"
+			},
+			"response": []
+		},
+		{
+			"name": "previous track",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "67d78135-ca15-4d8e-b8ee-8409777a529d",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"file\", data.currentsong.file);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3030/play?command=previous",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"play"
+					],
+					"query": [
+						{
+							"key": "command",
+							"value": "previous",
+							"equals": true
+						}
+					]
+				},
+				"description": "play previous track"
+			},
+			"response": []
+		},
+		{
+			"name": "get favorites",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"file\":\"{{file}}\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/favorite?$limit=20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"favorite"
+					],
+					"query": [
+						{
+							"key": "$limit",
+							"value": "20",
+							"equals": true
+						}
+					]
+				},
+				"description": "add file to favorites"
+			},
+			"response": []
+		},
+		{
+			"name": "add to favorites",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"file\":\"{{file}}\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/favorite",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"favorite"
+					]
+				},
+				"description": "add file to favorites"
+			},
+			"response": []
+		},
+		{
+			"name": "update storage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "033943a3-875b-4b42-812c-bc79bd35746c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3030/play?command=update&path=justIn",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"play"
+					],
+					"query": [
+						{
+							"key": "command",
+							"value": "update",
+							"equals": true
+						},
+						{
+							"key": "path",
+							"value": "justIn",
+							"equals": true
+						}
+					]
+				},
+				"description": "play previous track"
+			},
+			"response": []
+		},
+		{
+			"name": "get storage",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"file\":\"{{file}}\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/storage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"storage"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "search storage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e1a63d22-28a1-4e98-82c9-41399ed6c8a0",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"data\", JSON.stringify(data.data));"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"file\":\"{{file}}\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/storage?$search=dubtechno&$select[]=file&$limit=5&$sort[file]=-1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"storage"
+					],
+					"query": [
+						{
+							"key": "$search",
+							"value": "dubtechno",
+							"equals": true
+						},
+						{
+							"key": "$select[]",
+							"value": "file",
+							"equals": true
+						},
+						{
+							"key": "$limit",
+							"value": "5",
+							"equals": true
+						},
+						{
+							"key": "$sort[file]",
+							"value": "-1",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "search storage by key",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"file\":\"{{file}}\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/storage?Genre[$search]=techno",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"storage"
+					],
+					"query": [
+						{
+							"key": "Genre[$search]",
+							"value": "techno",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
