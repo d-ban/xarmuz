@@ -50,6 +50,7 @@ app.use('/images', function(req, res) {
       var file2image = file.replace(file_extension.extname(file), "." + image_extensions[i]);
         // console.log(storage1 + file2image);
       if (fs.existsSync(storage1 + file2image)) {
+        console.log("first exist");
 
         var img = fs.readFileSync(storage1 + file2image);
         res.writeHead(200, {
@@ -58,6 +59,8 @@ app.use('/images', function(req, res) {
         res.end(img, 'binary');
         status = 1;
       } else if (fs.existsSync(storage1 + file + "." + image_extensions[i])) {
+        console.log("second exist");
+
         var img = fs.readFileSync(storage1 + file + "." + image_extensions[i]);
         res.writeHead(200, {
           'Content-Type': 'image/' + image_extensions[i] + ''
@@ -66,7 +69,8 @@ app.use('/images', function(req, res) {
         res.end(img, 'binary');
         status = 1;
       }
-      else if (fs.existsSync(storage1 + "cover" + "." + image_extensions[i])) {
+      else if (fs.existsSync(storage1 + file + "." + image_extensions[i])) {
+        console.log("cover exist");
        var img = fs.readFileSync(storage1 + "cover" + "." + image_extensions[i]);
        res.writeHead(200, {
          'Content-Type': 'image/' + image_extensions[i] + ''

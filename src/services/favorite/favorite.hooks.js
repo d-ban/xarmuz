@@ -1,4 +1,5 @@
 
+const favs = require('../../hooks/favs');
 
 module.exports = {
   before: {
@@ -13,7 +14,7 @@ module.exports = {
 
   after: {
     all: [],
-    find: [],
+    find: [favs()],
     get: [],
     create: [],
     update: [],

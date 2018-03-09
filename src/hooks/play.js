@@ -124,6 +124,7 @@ else if (command==='random') {
   });
 }
 else {
+  console.log("else");
   context.app.client.sendCommand(cmd(command, []), function(err, currentsongResponse) {
     var csr = ""
     if (currentsongResponse) {
@@ -133,13 +134,13 @@ else {
     // console.log(csr);
     context.app.client.sendCommand(cmd("currentsong", []), function(err, currentsongResponse) {
       var csr1 = mpd.parseKeyValueMessage(currentsongResponse);
-
+      console.log(csr1.file);
       context.app.service('favorite').find({
                     query: {
-                      file: csr1.file,
-                      $limit: 0
+                      file: csr1.file
                     }
                   }).then((usersCount) => {
+                    console.log(usersCount);
                     csr1.favorite=usersCount.total
                     // console.log(csr.nextsong);
                     context.app.client.sendCommand(cmd("playlistinfo", [csr.nextsong]), function(err, nextsongData) {
@@ -149,6 +150,8 @@ else {
                       });
 
 
+                  }).catch(error2 => {
+                  console.log("error2")
                   });
           });
     }else {
