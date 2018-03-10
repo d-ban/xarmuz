@@ -123,6 +123,13 @@ else if (command==='random') {
     });
   });
 }
+else if (command==='vol') {
+  let state = context.params.query.state
+  console.log(state);
+  context.app.client.sendCommand(cmd("setvol", [state]), function(err, currentsongResponse) {
+    resolve({"vol":state})
+  });
+}
 else {
   console.log("else");
   context.app.client.sendCommand(cmd(command, []), function(err, currentsongResponse) {
