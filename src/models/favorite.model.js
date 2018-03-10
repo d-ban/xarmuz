@@ -6,7 +6,8 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const favorite = new Schema({
-    file: { type: String, required: true,unique:true }
+    file: { type: String, required: true,unique:true },
+    playCount: { type: Number ,default:0},
   }, {
     timestamps: true
   });

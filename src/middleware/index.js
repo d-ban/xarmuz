@@ -30,6 +30,7 @@ module.exports = function (app) {
       ]).then(([playResponse]) => {
         // console.log("playResponse",playResponse);
         let songDuration = (parseInt(playResponse.status.duration)/2)*1000
+        // songDuration = 3000
         console.log("wait",songDuration);
         clearTimeout(wait)
       wait = setTimeout(function() {
@@ -37,20 +38,26 @@ module.exports = function (app) {
         Promise.all([
           app.service('played').find({
             query:{
-              $sort:{createdAt:-1},
-              $limit:1
+              file:playResponse.currentsong.file
+              // $sort:{createdAt:-1},
+              // $limit:1
             }
           })
         ]).then(([playedResponse]) =>{
 
         if (playedResponse.data.length>0 && playedResponse.data[0].file!==playResponse.status.file) {
-          console.log("Nova stvar");
-          console.log("unesi novu stvar",playResponse.currentsong.file);
+          // console.log("Nova stvar");
+          // console.log("unesi novu stvar",playResponse.currentsong.file);
 
-          app.service('played').create({file:playResponse.currentsong.file})
+          app.service('played').create({file:playResponse.currentsong.file}).then((alreadyPLayed)=>{
+            // console.log("alreadyPLayed times",playedResponse.data.length);
+            app.service('favorite').patch(null, { playCount: playedResponse.data.length },{query:{file:playResponse.currentsong.file}}).then((favPlayCount)=>{
+              // console.log("favPlayCount times",favPlayCount);
+            })
+          })
         }else if (playedResponse.data.length===0) {
-          console.log("Prva stvar");
-          console.log("unesi novu stvar");
+          // console.log("Prva stvar");
+          // console.log("unesi novu stvar");
           // let curentTime = moment().format('YYYY-MM-DD HH:mm:ss')
           // let colect = {}
           // colect.createdAt=curentTime

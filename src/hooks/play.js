@@ -134,13 +134,13 @@ else {
     // console.log(csr);
     context.app.client.sendCommand(cmd("currentsong", []), function(err, currentsongResponse) {
       var csr1 = mpd.parseKeyValueMessage(currentsongResponse);
-      console.log(csr1.file);
+      // console.log(csr1.file);
       context.app.service('favorite').find({
                     query: {
                       file: csr1.file
                     }
                   }).then((usersCount) => {
-                    console.log(usersCount);
+                    // console.log(usersCount);
                     csr1.favorite=usersCount.total
                     // console.log(csr.nextsong);
                     context.app.client.sendCommand(cmd("playlistinfo", [csr.nextsong]), function(err, nextsongData) {

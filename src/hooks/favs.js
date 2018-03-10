@@ -11,8 +11,9 @@ module.exports = function (options = {}) {
   let path = context.params.query.path
 
   const currentsong = new Promise((resolve, reject) => {
+    let filler=[]
     function demo(file,i){
-      console.log(file,i);
+
       context.app.service('storage').find({
         query:{
           file:file,
@@ -20,25 +21,28 @@ module.exports = function (options = {}) {
         }
       }).then((response2) => {
       if (response2.data.length) {
+        let playCount = context.result.data[i].playCount
         context.result.data[i]=response2.data[0];
+        context.result.data[i].playCount=playCount
+          // console.log(file,"found");
         // console.log(  context.result.data[i]);
       //   // resolve([true,mpdTrack]);
       }else {
-      //   console.log(response2);
+        console.log(file,"not found");
       }
-      if (i+1 === context.result.data.length) {
+      filler.push(i)
+      // console.log(file,i,filler.length,context.result.data.length);
+      if (filler.length === context.result.data.length) {
         console.log("last one");
         resolve(context.result);
       }
+
       }).catch(error2 => {
       console.log("error2")
       })
-
-
     }
     let me = 0
     for (var i = 0; i < context.result.data.length; i++) {
-      me = me+1
     demo (context.result.data[i].file,i)
     }
     if (context.result.data.length===0) {
