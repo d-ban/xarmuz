@@ -37,7 +37,7 @@ module.exports = function (app) {
                       }
                     }).then((fromStorage) => {
                       // console.log(fromStorage);
-                      if (fromStorage.data[0].vol) {
+                      if (fromStorage.data[0].vol>0) {
                         app.client.sendCommand(cmd("setvol", [fromStorage.data[0].vol]), function(err, currentsongResponse) {
                           console.log("set new volume",currentsongResponse);
                         });
