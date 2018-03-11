@@ -3,13 +3,12 @@
 var moment = require('moment')
 var mpd = require('mpd'),
 cmd = mpd.cmd
-cmd = mpd.cmd
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
   return async context => {
   let command = context.params.query.command
   let path = context.params.query.path
-
+  console.log("play hook");
   const currentsong = new Promise((resolve, reject) => {
 
 if (command==='update') {
@@ -162,6 +161,7 @@ else {
                   });
           });
     }else {
+      console.log("else");
       resolve({"status":csr})
     }
   });

@@ -14,6 +14,7 @@ module.exports = function (app) {
     port: 6600,
     host: app.settings.mpdHost,
   });
+  cmd = mpd.cmd
 
   app.client.on('system-player', function() {
       console.log("system-player O");
@@ -28,6 +29,25 @@ module.exports = function (app) {
 
 
       ]).then(([playResponse]) => {
+        // set volume
+        // console.log(playResponse);
+        app.service('storage').find({
+                      query: {
+                        file: playResponse.currentsong.file
+                      }
+                    }).then((fromStorage) => {
+                      // console.log(fromStorage);
+                      if (fromStorage.data[0].vol) {
+                        app.client.sendCommand(cmd("setvol", [fromStorage.data[0].vol]), function(err, currentsongResponse) {
+                          console.log("set new volume",currentsongResponse);
+                        });
+                      }else {
+                        app.client.sendCommand(cmd("setvol", [100]), function(err, currentsongResponse) {
+                          console.log("set default volume",currentsongResponse);
+                        });
+                      }
+                    });
+
         // console.log("playResponse",playResponse);
         let songDuration = (parseInt(playResponse.status.duration)/2)*1000
         // songDuration = 3000
@@ -88,6 +108,16 @@ module.exports = function (app) {
   let waitPlaylist
   app.client.on('system-playlist', function() {
     console.log("playlist queue create");
+    // clearTimeout(waitPlaylist)
+  // waitPlaylist = setTimeout(function() {
+    // app.service('queue').create({})
+  // },5000);
+  });
+  app.client.on('system-mixer', function() {
+    console.log("vol change");
+    app.service('played').emit('created', {
+      message:"vol changed"
+    });
     // clearTimeout(waitPlaylist)
   // waitPlaylist = setTimeout(function() {
     // app.service('queue').create({})
