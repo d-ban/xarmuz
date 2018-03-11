@@ -42,7 +42,7 @@ module.exports = function (app) {
                           console.log("set new volume",currentsongResponse);
                         });
                       }else {
-                        app.client.sendCommand(cmd("setvol", [100]), function(err, currentsongResponse) {
+                        app.client.sendCommand(cmd("setvol", [80]), function(err, currentsongResponse) {
                           console.log("set default volume",currentsongResponse);
                         });
                       }
