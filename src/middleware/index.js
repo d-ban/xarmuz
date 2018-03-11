@@ -36,8 +36,8 @@ module.exports = function (app) {
                         file: playResponse.currentsong.file
                       }
                     }).then((fromStorage) => {
-                      console.log(fromStorage.data[0]);
-                      if (fromStorage.data[0].vol>0) {
+
+                      if (fromStorage.data[0].vol) {
                         app.client.sendCommand(cmd("setvol", [fromStorage.data[0].vol]), function(err, currentsongResponse) {
                           console.log("set new volume",currentsongResponse);
                         });

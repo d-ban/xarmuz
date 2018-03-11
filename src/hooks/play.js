@@ -53,8 +53,10 @@ if (command==='update') {
       if (newTrack[0]) {
         // console.log(newTrack[1]);
         context.app.client.sendCommand(cmd("find", ['file',newTrack[1].file]), function(err, findResponse) {
+          console.log(findResponse);
           let mpdTrackData = mpd.parseKeyValueMessage(findResponse)
           // remove a property from a JavaScript object
+          mpdTrackData.vol=80
           delete mpdTrackData.Pos;
           // mpdTrackData.Pos=0
           // mpdTrackData.hash_file=mpdTrackData.file
